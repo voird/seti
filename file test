@@ -2,7 +2,8 @@
 #include "fstream"
 #include <string>
 #define WINSOCK _DEPRECATED_NO _WARNINGS // winsoc2
-#include <winsock2.h>
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+#include <winsock2.h>sd
 #include <string>
 #include <windows.h>
 #include <experimental/filesystem>
@@ -10,7 +11,6 @@
 #pragma comment (lib, "Ws2_32.lib")
 #pragma warning (disable: 4996) // 4996
 using namespace std;
-#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define SRV_HOST "localhost"
 #define SRV_PORT 1234
 #define CLNT_PORT 1235
@@ -101,9 +101,12 @@ int main() {
     }
     srv_sin.sin_addr = ip_to_num;
     connect(s, (sockaddr*)&srv_sin, sizeof(srv_sin));
+    cout << "help";
     string path;
     do {
+        cout << "help";
         from_len = recv(s, (char*)&buf, BUF_SIZE, 0);
+        cout << "help";
         buf[from_len] = 0;
         cout << buf << endl;
         Student student{};
