@@ -1,0 +1,19 @@
+//чисто формально, не трогая проблемы TCP / UDP
+struct mystruct { //описание структуры
+int choise;
+int b;
+int a;
+};
+char buf[1000]; //буфер
+mystruct c; //экземпляр структуры
+отправим его просто как массив char :
+send(s,(char*)(&c),sizeof(mystruct),0);
+Или переписать в буфер, а потом отправить :
+memcpy(buf,&c,sizeof(mystruct));
+send(s,buf,sizeof(mystruct),0);
+
+На приемной стороне
+recv(s,(char*)(&c),sizeof(mystruct),0);
+Или принять в буфер и переписать :
+recv(s,buf,1000,0);
+memcpy(&c,buf,sizeof(mystruct));
